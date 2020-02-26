@@ -82,8 +82,8 @@ public class Friendship {
     }
 
     void setFriendRequestGotAccepted() {
-        if (!this.state.isReceivedFriendRequest()) {
-            throw new RuntimeException("Did't receive friend request");
+        if (!this.state.isSentFriendRequest()) {
+            throw new RuntimeException("Did't sent friend request");
         }
 
         this.state = FriendshipState.FRIEND;
