@@ -61,8 +61,12 @@ public class Friendship {
     }
 
     void setFriendRequestGotCanceled() {
-        if (!this.state.isReceivedFriendRequest()) {
-            throw new RuntimeException("Did't receive friend request");
+        if (this.state.isIgnoring()) {
+            return;
+        }
+
+        if (!this.state.isSentFriendRequest()) {
+            throw new RuntimeException("Did't receive sent request");
         }
 
         this.state = FriendshipState.GOT_CANCELED;
@@ -155,6 +159,10 @@ public class Friendship {
         if (this.state.isReceivedFriendRequest()) {
             this.setFriendRequestGotDeclined();
             return;
+        }
+
+        if (this.state.isIgnoring()) {
+            this.state = FriendshipState.NONE;
         }
     }
 

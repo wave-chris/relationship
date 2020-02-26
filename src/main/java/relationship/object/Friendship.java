@@ -42,7 +42,9 @@ public class Friendship {
         }
 
         this.state = FriendshipState.CANCELED;
-        target.state = FriendshipState.GOT_CANCELED;
+        if (!target.state.isIgnoring()) {
+            target.state = FriendshipState.GOT_CANCELED;
+        }
     }
 
     void acceptFriendRequestFrom(final Friendship target) {
@@ -90,6 +92,14 @@ public class Friendship {
         if (this.didReceiveFriendRequestFrom(target)) {
             this.declineFriendRequestFrom(target);
             return;
+        }
+
+        if (this.state.isIgnoring()) {
+            this.state = FriendshipState.NONE;
+        }
+
+        if (target.state.isIgnoring()) {
+            target.state = FriendshipState.NONE;
         }
     }
 

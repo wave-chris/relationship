@@ -14,6 +14,8 @@ public class Main {
         relationshipManager.sendFriendRequest(from, to);
         relationshipManager.sendFriendRequest(to, from);
 
+        relationshipManager.acceptFriendRequest(from, to);
+
         final Relationship fromTo = relationshipManager.findRelationshipByFromAndTo(from, to).get();
         final Relationship toFrom = relationshipManager.findRelationshipByFromAndTo(to, from).get();
 

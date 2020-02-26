@@ -27,7 +27,7 @@ public class BlockRelationship {
 
     void setGotBlocked() {
         if (this.state.isBlockedBy()) {
-            throw new RuntimeException("Already blocked by");
+            throw new RuntimeException("Already got blocked");
         }
 
         if (!this.state.isBlocking()) {
